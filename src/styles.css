@@ -1,0 +1,124 @@
+:root {
+    --main-bg-color: #ff6000;
+    --border-bg-color: #ff4800;
+    --text-primary-color: #545454;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: var(--text-primary-color)
+}
+
+body {
+    display: flex;
+    font-family: sans-serif;
+    justify-content: center;
+}
+
+.container {
+    background-color: var(--main-bg-color);
+    margin: 50px;
+    padding: 50px;
+    border-radius: 25px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    color: var(--text-primary-color);
+}
+
+.title span {
+    color: white;
+    font-weight: bold;
+}
+
+.status-action {
+    display: flex;
+    margin-top: 25px;
+    font-size: 25px;
+    justify-content: space-around;
+}
+
+.reset {
+    cursor: pointer;
+
+}
+
+.reset:hover {
+    color: whitesmoke;
+}
+
+.game-grid {
+    background-color: var(--border-bg-color);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 15px;
+    margin-top: 50px;
+}
+
+.game-cell {
+    height: 200px;
+    width: 200px;
+    background-color: var(--main-bg-color);
+    cursor: pointer;
+}
+
+.x {
+    background-image: url('../images/x.png');
+    background-repeat: no-repeat;
+    background-size: 200px 200px;
+}
+
+.o {
+    background-image: url('../images/o.png');
+    background-repeat: no-repeat;
+    background-size: 200px 200px;
+}
+
+.modal-container {
+    position: absolute;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(76,92,104, 0.8);
+}
+
+.modal {
+    position: fixed;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 400px;
+    width: 400px;
+    background-color: rgb(255, 94, 91);
+    z-index: 10;
+    border-radius: 25px;
+}
+
+.winner-title {
+    display: flex;
+    justify-content: center;
+    color: var(--text-primary-color);
+}
+
+.newgame {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 100px;
+    height: 50px;
+    width: 100px;
+    justify-content: center;
+    text-align: center;
+    border-style: solid;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.newgame:hover {
+    color: whitesmoke;
+}
