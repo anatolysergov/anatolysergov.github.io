@@ -1,4 +1,5 @@
 import { sendSomething } from './temp';
+import { CookieManager } from './cookie';
 
 let board = [
     ['','',''],
@@ -11,6 +12,8 @@ let playerPiece = 'O';
 
 let playerTurn:boolean = false;
 let winner:boolean = false;
+
+let cook: CookieManager;
 
 function run():void {
     //Computer places original piece
@@ -144,7 +147,8 @@ function resetboard(): void {
             count++;
         }
     }
-
+    let rasinCookie = new CookieManager(0,0);
+    rasinCookie.resetCookie();
     drawBoard();
 }
 
@@ -265,32 +269,32 @@ function endGame(winner:string): void {
 }
 
 function winsCount(winner:string): void {
-
-    if(winner == 'set' && localStorage.getItem('You') == null && localStorage.getItem('Pc') == null) {
-        localStorage.setItem('Pc', '0');
-        localStorage.setItem('You', '0');
-        document.getElementById('winningYou').innerHTML = 'You:' + localStorage.getItem('You');
-        document.getElementById('winningPc').innerHTML = 'Pc:' + localStorage.getItem('Pc');
-        console.log('reset');
-    }
+    let oatmealCookie = new CookieManager(0,0);
     if(winner == 'set') {
-        localStorage.setItem('Pc', '0');
-        localStorage.setItem('You', '0');
-        document.getElementById('winningYou').innerHTML = 'You:' + localStorage.getItem('You');
-        document.getElementById('winningPc').innerHTML = 'Pc:' + localStorage.getItem('Pc');
+        if(!oatmealCookie.checkCookies){ 
+            oatmealCookie.createCookie();
+        }
+
+        let { computerPoints, userPoints } = oatmealCookie.getCookieValues();
+
+        document.getElementById('winningYou').innerHTML = 'You:' + userPoints;
+        document.getElementById('winningPc').innerHTML = 'Pc:' + computerPoints;
     }
+
     if(winner == 'Pc') {
-        let totalPoints = parseInt(localStorage.getItem('Pc')) + 1;
-        localStorage.setItem('Pc', `${totalPoints}`);
-        document.getElementById('winningYou').innerHTML = 'You:' + localStorage.getItem('You');
-        document.getElementById('winningPc').innerHTML = 'Pc:' + localStorage.getItem('Pc');
+        oatmealCookie.addCookiePoints('pc');
+        let { computerPoints, userPoints } = oatmealCookie.getCookieValues();
+
+        document.getElementById('winningYou').innerHTML = 'You:' + userPoints;
+        document.getElementById('winningPc').innerHTML = 'Pc:' + computerPoints;
     }
     if(winner == 'You') {
-        let totalPoints = parseInt(localStorage.getItem('You')) + 1;
-        console.log(totalPoints);
-        localStorage.setItem('You', `${totalPoints}`);
-        document.getElementById('winningYou').innerHTML = 'You:' + localStorage.getItem('You');
-        document.getElementById('winningPc').innerHTML = 'Pc:' + localStorage.getItem('Pc');
+        oatmealCookie.addCookiePoints('you');
+        let { computerPoints, userPoints } = oatmealCookie.getCookieValues();
+
+        document.getElementById('winningYou').innerHTML = 'You:' + userPoints;
+        document.getElementById('winningPc').innerHTML = 'Pc:' + computerPoints;
+        
     }
 }
 
